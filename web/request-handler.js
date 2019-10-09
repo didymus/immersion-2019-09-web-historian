@@ -2,7 +2,7 @@ const path = require('path');
 const archive = require('../helpers/archive-helpers');
 // require more modules/folders here!
 const helpers = require('./http-helpers'); // require http-helps to use serverAssets
-//const querystring = require('querystring');
+const querystring = require('querystring');
 
 
 exports.handleRequest = (req, res) => {

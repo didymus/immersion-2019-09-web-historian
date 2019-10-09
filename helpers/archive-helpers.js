@@ -31,47 +31,40 @@ exports.initialize = (pathsObj) => {
 
 exports.readListOfUrls = (callback) => {
 fs.readFile(exports.paths.list, 'utf8', (err, data) => {
-  if(err){
-    throw err;
+ //console.log('data' ,data);
+
+ data = data.toString().split('\n');
+  if(callback){
+    callback(err, data);
   }
-  //callback(data);
-  let arr = data.split('\n');
-  callback(arr.slice(0, -1));
+  
 });
 };
 
 exports.isUrlInList = (url, callback) => {
 fs.readFile(exports.paths.list, 'utf8', (err, data) => {
-  if(err){
-    throw err;
-  }
-  callback(data);
-  if(data.indexOf(url) > 0){
-    return true;
-  } else {
-    return false;
+  if(callback){
+    let urlArray = data.split('\n');
+    let found = urlArray.indexOf(url) !== -1;
+    callback(err, found);
   }
 });
 };
 
 exports.addUrlToList = (url, callback) => {
-fs.appendFile(exports.path.list, url, +'\n', (err) => {
-  if(err){
-    throw err
-  }
-})
-console.log(url + ' saved!');
+  //console.log('callback', callback);
+fs.appendFile(exports.paths.list, url + '\n', (err) => {
+if(callback){
+  callback(err);
+}
+});
 };
 
 exports.isUrlArchived = (url, callback) => {
-fs.readFile(exports.paths.archivedSites, 'utf8', (err, data) => {
-  if(err){
-    throw err;
-  }
-  if(data.indexOf(url) > 0){
-    return true;
-  } else { 
-    return false;
+fs.readdir(exports.paths.archivedSites, 'utf8', (err, files) => {
+  let bool = files.includes(url);
+  if(callback){
+    callback(err, bool);
   }
 });
 };

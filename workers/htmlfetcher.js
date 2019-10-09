@@ -4,7 +4,6 @@ const archive = require('..helpers/archive-helpers');
 const cron = require('node-cron');
 
 cron.schedule('*/1 * * * *', function(){
-    console.log('Running every minute');
     archive.readListOfUrls(archive.downloadUrls);
 });
 
