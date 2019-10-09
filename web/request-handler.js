@@ -7,7 +7,7 @@ const querystring = require('querystring');
 exports.handleRequest = (req, res) => {
   console.log('Serving request type ' + req.method + ' for url ' + req.url);
   //res.end(archive.path.list);
-
+  
 };
 // server:
 // GET /
