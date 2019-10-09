@@ -1,0 +1,28 @@
+{
+  "name": "web-historian",
+  "version": "1.1.0",
+  "description": "A web service that archives sites on the internet",
+  "author": "Hack Reactor <curriculum.team@hackreactor.com>",
+  "license": "UNLICENSED",
+  "private": true,
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "scripts": {
+    "start": "node ./web/basic-server.js",
+    "test": "mocha test",
+    "lint": "eslint ./"
+  },
+  "dependencies": {
+    "bluebird": "^3.3.4",
+    "cron": "^1.1.0",
+    "request": "^2.70.0",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
+    "mocha": "^2.4.5",
+    "supertest": "^1.2.0"
+  }
+}
