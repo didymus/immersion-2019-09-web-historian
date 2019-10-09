@@ -15,8 +15,9 @@
   },
   "dependencies": {
     "bluebird": "^3.3.4",
-    "cron": "^1.1.0",
+    "cron": "^1.7.2",
     "fs": "0.0.1-security",
+    "node-cron": "^2.0.3",
     "request": "^2.70.0",
     "underscore": "^1.8.3"
   },

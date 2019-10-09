@@ -1,6 +1,6 @@
 const http = require('http');
 const handler = require('./request-handler');
-const initialize = require('./initialize.js');
+const initialize = require('./initialize');
 
 // Why do you think we have this here?
 // HINT: It has to do with what's in .gitignore:

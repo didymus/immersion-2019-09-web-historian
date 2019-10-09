@@ -18,7 +18,7 @@ exports.serveAssets = (res, asset, callback) => {
     if(err){
       throw err;
     }
-    if(res.read !== undefined){
+    if(res.head !== undefined){
       res.writeHead(200, exports.headers);
     }
     res.end(data);

@@ -1,10 +1,10 @@
 // Use the code in `archive-helpers.js` to actually download the urls
 // that are waiting.
-let archive = require('..helpers/archive-helpers');
-let cron = require('node-cron');
+const archive = require('..helpers/archive-helpers');
+const cron = require('node-cron');
 
 cron.schedule('*/1 * * * *', function(){
-    console.log('Running a task every minute.');
+    console.log('Running every minute');
     archive.readListOfUrls(archive.downloadUrls);
 });
 

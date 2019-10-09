@@ -2,7 +2,8 @@ const path = require('path');
 const archive = require('../helpers/archive-helpers');
 // require more modules/folders here!
 const helpers = require('./http-helpers'); // require http-helps to use serverAssets
-const querystring = require('querystring');
+//const querystring = require('querystring');
+
 
 exports.handleRequest = (req, res) => {
   console.log('Serving request type ' + req.method + ' for url ' + req.url);
@@ -10,6 +11,8 @@ exports.handleRequest = (req, res) => {
   if(req.method === 'GET'){
     if(req.url === '/'){
       helpers.serveAssets(res, path.join(archive.paths.siteAssets, '/index.html'));
+    } else if(req.url === '/styles.css') {
+      helpers.serveAssets(res, path.join(archive.paths.siteAssets, '/styles.css'));
     } else {
       archive.isUrlArchived(path.basename(req.url), function(bool){
         if(bool){
@@ -18,10 +21,9 @@ exports.handleRequest = (req, res) => {
           res.writeHead(404, helpers.headers);
           res.end();
         }
-      })
+      });
     }
   }
-
 };
 // server:
 // GET /
