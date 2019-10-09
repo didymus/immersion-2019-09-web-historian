@@ -1,6 +1,9 @@
 const _ = require('underscore');
 const path = require('path');
 const fs = require('fs');
+const https = require('https');
+const http = require('http');
+const helpers = require('../web/http-helpers');
 
 /*
  * You will need to reuse the same paths many times over in the course of this sprint.
@@ -10,9 +13,9 @@ const fs = require('fs');
  */
 
 exports.paths = {
-  siteAssets: path.join(__dirname, '../web/public'),
-  archivedSites: path.join(__dirname, '../archives/sites'),
-  list: path.join(__dirname, '../archives/sites.txt'),
+  'siteAssets' : path.join(__dirname, '../web/public'),
+  'archivedSites' : path.join(__dirname, '../archives/sites'),
+  'list' : path.join(__dirname, '../archives/sites.txt'),
 };
 
 // Used for stubbing paths for tests, do not modify
@@ -25,18 +28,49 @@ exports.initialize = (pathsObj) => {
 // The following function names are provided to you to suggest how you might
 // modularize your code. Keep it clean!
 
-
 exports.readListOfUrls = (callback) => {
+
 };
 
 exports.isUrlInList = (url, callback) => {
+
 };
 
 exports.addUrlToList = (url, callback) => {
+
 };
 
 exports.isUrlArchived = (url, callback) => {
+
 };
 
+ 
+
 exports.downloadUrls = (urls) => {
+//console.log(urls);
+let getRequest = function(url){
+  fs.open(`${exports.paths.archivedSites}/${url}`, 'w', function(err, sites){
+    if(err){
+      throw err;
+    }
+    //console.log(url);
+    https.get(`https://${url}`, function(res){
+      let body = '';
+      res.on('data', (chunk) => {
+        body += chunk;
+      });
+      res.on('end', function(){
+        fs.write(sites, body, 'utf8');
+      });
+    });
+  });
+};
+for(let i = 0; i < urls.length; i++){
+  getRequest(urls[i]);
+}
+// http.get('http://' + url, function(res){
+//   helpers.getData(res, function(data){
+//     fs.writeFile(path.join(exports.paths.archivedSites, url), data);
+//   });
+// });
 };

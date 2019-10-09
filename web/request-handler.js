@@ -7,7 +7,21 @@ const querystring = require('querystring');
 exports.handleRequest = (req, res) => {
   console.log('Serving request type ' + req.method + ' for url ' + req.url);
   //res.end(archive.path.list);
-  
+  if(req.method === 'GET'){
+    if(req.url === '/'){
+      helpers.serveAssets(res, path.join(archive.paths.siteAssets, '/index.html'));
+    } else {
+      archive.isUrlArchived(path.basename(req.url), function(bool){
+        if(bool){
+          helpers.serveAssets(res, path.join(archive.paths.archivedSites, req.url));
+        } else {
+          res.writeHead(404, helpers.headers);
+          res.end();
+        }
+      })
+    }
+  }
+
 };
 // server:
 // GET /
