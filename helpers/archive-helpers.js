@@ -37,7 +37,7 @@ fs.readFile(exports.paths.list, 'utf8', (err, data) => {
   }
 });
 };
-exports.readListOfUrlsAsync = Promise.promisify(exports.readListOfUrls);
+exports.readListOfUrls = Promise.promisify(exports.readListOfUrls);
 
 exports.isUrlInList = (url, callback) => {
 fs.readFile(exports.paths.list, 'utf8', (err, data) => {
@@ -48,7 +48,7 @@ fs.readFile(exports.paths.list, 'utf8', (err, data) => {
   }
 });
 };
-exports.isUrlInListAsync = Promise.promisify(exports.isUrlInList);
+exports.isUrlInList = Promise.promisify(exports.isUrlInList);
 
 exports.addUrlToList = (url, callback) => {
   //console.log('callback', callback);
@@ -58,7 +58,7 @@ if(callback){
 }
 });
 };
-exports.addUrlToListAsync = Promise.promisify(exports.addUrlToList);
+exports.addUrlToList = Promise.promisify(exports.addUrlToList);
 
 exports.isUrlArchived = (url, callback) => {
 fs.readdir(exports.paths.archivedSites, 'utf8', (err, files) => {
@@ -68,7 +68,7 @@ fs.readdir(exports.paths.archivedSites, 'utf8', (err, files) => {
   }
 });
 };
-exports.isUrlArchivedAsync = Promise.promisify(exports.isUrlArchived);
+exports.isUrlArchived = Promise.promisify(exports.isUrlArchived);
 
 // exports.downloadUrls = (urls) => { // another version we wrote that uses http
 //   // console.log(urls);
