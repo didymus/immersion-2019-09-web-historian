@@ -3,8 +3,6 @@ const path = require('path');
 const fs = require('fs');
 const https = require('https');
 //const http = require('http');
-//const helpers = require('../web/http-helpers');
-//const request = require('request');
 
 /*
  * You will need to reuse the same paths many times over in the course of this sprint.
@@ -69,17 +67,29 @@ fs.readdir(exports.paths.archivedSites, 'utf8', (err, files) => {
 });
 };
 
+// exports.downloadUrls = (urls) => {
+//   // console.log(urls);
+//   for (let i = 0; i < urls.length; i++) {
+//     http.get('http://' + urls[i], (res) => {
+//       fs.appendFile(exports.paths.archivedSites + '/' + urls[i], res.body, (err) => {
+//         if (err) {
+//           console.log('Error: ', err);
+//         }
+//       })
+//     })
+//   }
+// };
 exports.downloadUrls = (urls) => {
-//console.log(urls);
-let getRequest = function(url){
-  fs.open(`${exports.paths.archivedSites}/${url}`, 'w', function(err, sites){
-    if(err){
-      throw err;
-    }
-    //console.log(url);
+  // console.log(urls);
+  let httpsGet = (url) => {
+    fs.open(`${exports.paths.archivedSites}/${url}`, 'w', function (err, sites) {
+      if (err) {
+        console.log('Error: ', err);
+      }
+    // console.log(url);
     https.get(`https://${url}`, function(res){
       let body = '';
-      res.on('data', (chunk) => {
+      res.on('data', function(chunk){
         body += chunk;
       });
       res.on('end', function(){
@@ -87,13 +97,8 @@ let getRequest = function(url){
       });
     });
   });
-};
+  }
 for(let i = 0; i < urls.length; i++){
-  getRequest(urls[i]);
-}
-// http.get('http://' + url, function(res){
-//   helpers.getData(res, function(data){
-//     fs.writeFile(path.join(exports.paths.archivedSites, url), data);
-//   });
-// });
+  httpsGet(urls[i]);
+};
 };
