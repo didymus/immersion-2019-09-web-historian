@@ -80,7 +80,7 @@ exports.downloadUrls = (urls) => {
   //console.log(urls);
   const httpsGet = (url) => {
     fs.open(`${exports.paths.archivedSites}/${url}`, 'w', (err, sites) => {
-      if (err) {
+      if(err) {
         console.log('Error: ', err);
       }
     //console.log(url);
