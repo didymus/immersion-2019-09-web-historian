@@ -58,7 +58,7 @@ if(callback){
 }
 });
 };
-exports.addUrlToList = Promise.promisify(exports.addUrlToList);
+exports.addUrlToListAsync = Promise.promisify(exports.addUrlToList);
 
 exports.isUrlArchived = (url, callback) => {
 fs.readdir(exports.paths.archivedSites, 'utf8', (err, files) => {

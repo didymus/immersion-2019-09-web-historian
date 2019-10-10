@@ -14,7 +14,7 @@
     "lint": "eslint ./"
   },
   "dependencies": {
-    "bluebird": "^3.3.4",
+    "bluebird": "^3.7.0",
     "cron": "^1.7.2",
     "fs": "0.0.1-security",
     "node-cron": "^2.0.3",
