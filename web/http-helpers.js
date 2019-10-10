@@ -1,4 +1,3 @@
-const path = require('path');
 const fs = require('fs');
 
 exports.headers = {
@@ -15,8 +14,8 @@ exports.serveAssets = (res, asset, callback) => {
   // css, or anything that doesn't change often.)
   fs.readFile(asset, 'utf8', (err, data) => {
     //console.log('data: ', data);
-    if(err){
-      console.log('Error: ', err);
+    if(callback){
+      callback(err, data);
     }
     if(res.head !== undefined){
       res.writeHead(200, exports.headers);
@@ -26,4 +25,3 @@ exports.serveAssets = (res, asset, callback) => {
 };
 
 // As you progress, keep thinking about what helper functions you can put here!
-
