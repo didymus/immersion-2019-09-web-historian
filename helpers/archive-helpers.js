@@ -82,17 +82,17 @@ fs.readdir(exports.paths.archivedSites, 'utf8', (err, files) => {
 exports.downloadUrls = (urls) => {
   // console.log(urls);
   let httpsGet = (url) => {
-    fs.open(`${exports.paths.archivedSites}/${url}`, 'w', function (err, sites) {
+    fs.open(`${exports.paths.archivedSites}/${url}`, 'w', (err, sites) => {
       if (err) {
         console.log('Error: ', err);
       }
     // console.log(url);
-    https.get(`https://${url}`, function(res){
+    https.get(`https://${url}`, (response) => {
       let body = '';
-      res.on('data', function(chunk){
+      response.on('data', (chunk) => {
         body += chunk;
       });
-      res.on('end', function(){
+      response.on('end', () => {
         fs.write(sites, body, 'utf8');
       });
     });
