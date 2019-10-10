@@ -3,8 +3,7 @@
 const archive = require('../helpers/archive-helpers');
 const cron = require('node-cron');
 
-cron.schedule('*/1 * * * *', function(){
+cron.schedule('*/1 * * * *', () => {
     // running task every minute
     archive.readListOfUrls(archive.downloadUrls);
 });
-//archive.readListOfUrls(archive.downloadUrls);

@@ -2,7 +2,7 @@ const _ = require('underscore');
 const path = require('path');
 const fs = require('fs');
 const https = require('https');
-//const http = require('http');
+//const http = require('http'); // might need in future
 
 /*
  * You will need to reuse the same paths many times over in the course of this sprint.
@@ -29,21 +29,19 @@ exports.initialize = (pathsObj) => {
 
 exports.readListOfUrls = (callback) => {
 fs.readFile(exports.paths.list, 'utf8', (err, data) => {
- //console.log('data' ,data);
-
- data = data.toString().split('\n');
+ //console.log('data', data);
+  data = data.toString().split('\n');
   if(callback){
     callback(err, data);
   }
-  
 });
 };
 
 exports.isUrlInList = (url, callback) => {
 fs.readFile(exports.paths.list, 'utf8', (err, data) => {
   if(callback){
-    let urlArray = data.split('\n');
-    let found = urlArray.indexOf(url) !== -1;
+    const urlArray = data.split('\n');
+    const found = (urlArray.indexOf(url) !== -1);
     callback(err, found);
   }
 });
@@ -60,14 +58,13 @@ if(callback){
 
 exports.isUrlArchived = (url, callback) => {
 fs.readdir(exports.paths.archivedSites, 'utf8', (err, files) => {
-  let bool = files.includes(url);
+  const bool = files.includes(url);
   if(callback){
     callback(err, bool);
   }
 });
 };
-
-// exports.downloadUrls = (urls) => {
+// exports.downloadUrls = (urls) => { // another version we wrote that uses http
 //   // console.log(urls);
 //   for (let i = 0; i < urls.length; i++) {
 //     http.get('http://' + urls[i], (res) => {
@@ -80,17 +77,17 @@ fs.readdir(exports.paths.archivedSites, 'utf8', (err, files) => {
 //   }
 // };
 exports.downloadUrls = (urls) => {
-  // console.log(urls);
-  let httpsGet = (url) => {
+  //console.log(urls);
+  const httpsGet = (url) => {
     fs.open(`${exports.paths.archivedSites}/${url}`, 'w', (err, sites) => {
       if (err) {
         console.log('Error: ', err);
       }
-    // console.log(url);
+    //console.log(url);
     https.get(`https://${url}`, (response) => {
       let body = '';
-      response.on('data', (chunk) => {
-        body += chunk;
+      response.on('data', (chonk) => {
+        body += chonk;
       });
       response.on('end', () => {
         fs.write(sites, body, 'utf8');

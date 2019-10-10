@@ -1,6 +1,5 @@
 const path = require('path');
 const fs = require('fs');
-const archive = require('../helpers/archive-helpers');
 
 exports.headers = {
   'access-control-allow-origin': '*',
@@ -15,8 +14,9 @@ exports.serveAssets = (res, asset, callback) => {
   // (Static files are things like html (yours or archived from others...),
   // css, or anything that doesn't change often.)
   fs.readFile(asset, 'utf8', (err, data) => {
+    //console.log('data: ', data);
     if(err){
-      throw err;
+      console.log('Error: ', err);
     }
     if(res.head !== undefined){
       res.writeHead(200, exports.headers);
