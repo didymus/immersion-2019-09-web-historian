@@ -16,7 +16,7 @@ exports.handleRequest = (req, res) => {
         } else {
           // else write 404 status code to appropriate headers
           res.writeHead(404, helpers.headers);
-          res.end();
+          res.end(); // end
         }
       });
     }

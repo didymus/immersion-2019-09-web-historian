@@ -37,7 +37,7 @@ fs.readFile(exports.paths.list, 'utf8', (err, data) => {
   }
 });
 };
-exports.readListOfUrls = promisify(exports.readListOfUrls);
+exports.readListOfUrlsAsync = promisify(exports.readListOfUrls);
 
 exports.isUrlInList = (url, callback) => {
 fs.readFile(exports.paths.list, 'utf8', (err, data) => {
@@ -48,7 +48,7 @@ fs.readFile(exports.paths.list, 'utf8', (err, data) => {
   }
 });
 };
-exports.isUrlInList = promisify(exports.isUrlInList);
+exports.isUrlInListAsync = promisify(exports.isUrlInList);
 
 exports.addUrlToList = (url, callback) => {
   //console.log('callback', callback);
@@ -58,7 +58,7 @@ if(callback){
 }
 });
 };
-exports.addUrlToList = promisify(exports.addUrlToList);
+exports.addUrlToListAsync = promisify(exports.addUrlToList);
 
 exports.isUrlArchived = (url, callback) => {
 fs.readdir(exports.paths.archivedSites, 'utf8', (err, files) => {
@@ -68,7 +68,7 @@ fs.readdir(exports.paths.archivedSites, 'utf8', (err, files) => {
   }
 });
 };
-exports.isUrlArchived = promisify(exports.isUrlArchived);
+exports.isUrlArchivedAsync = promisify(exports.isUrlArchived);
 
 // exports.downloadUrls = (urls) => { // another version we wrote that uses http
 //   // console.log(urls);
@@ -78,8 +78,8 @@ exports.isUrlArchived = promisify(exports.isUrlArchived);
 //         if (err) {
 //           console.log('Error: ', err);
 //         }
-//       })
-//     })
+//       });
+//     });
 //   }
 // };
 exports.downloadUrls = (urls) => {
